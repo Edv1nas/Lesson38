@@ -13,7 +13,7 @@ class Product:
     price: float
     quantity: int
 
-    def total_cost(self):
+    def total_cost(self) -> int:
         return self.price * self.quantity
     
 def find_highest_product_cost(products: List[Product]) -> Product:
