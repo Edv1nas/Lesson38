@@ -14,17 +14,22 @@ class Product:
     quantity: int
 
     def total_cost(self) -> int:
+        if self.quantity == 0:
+            return 0
         return self.price * self.quantity
     
-def find_highest_product_cost(products: List[Product]) -> Product:
-    highest_cost = 0
-    # highest_cost_product = None
-    for product in products:
-        total_cost = product.total_cost()
-        if total_cost > highest_cost:
-            highest_cost = total_cost
-            highest_cost_product = product.name
-    return highest_cost_product
+@dataclass
+class Warehouse:
+
+    def find_highest_product_cost(self, products: List[Product]) -> str:
+        highest_cost = 0
+        highest_cost_product = None
+        for product in products:
+            total_cost = product.total_cost()
+            if total_cost > highest_cost:
+                highest_cost = total_cost
+                highest_cost_product = product.name
+        return highest_cost_product
 
 product_list = [
     Product(1, "Pienas", 1.5, 13),
@@ -33,6 +38,8 @@ product_list = [
     Product(4, "Sviestas", 2.99, 5),
     Product(5, "Varškė", 2, 22),
 ]
+
+warehouse = Warehouse()
 
 while True:
     print("\n")
@@ -46,8 +53,8 @@ while True:
             print(f"Product id: {product.product_id}, Name: {product.name}, Price: {product.price}, Quantity: {product.quantity}")
 
     elif choice == 2:
-        highest_product_cost = find_highest_product_cost(product_list)
-        print(f"Product highest total cost: {find_highest_product_cost(product_list)}")
+        highest_product_cost = warehouse.find_highest_product_cost(product_list)
+        print(f"Product highest total cost: {warehouse.find_highest_product_cost(product_list)}")
 
 
     elif choice == 3:
